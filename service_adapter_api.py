@@ -1,4 +1,4 @@
-# адаптер для эндпоинта Get c query_params
+# адаптеры для эндпоинтов
 
 def data_request(
     self,
@@ -39,3 +39,23 @@ def data_request(
             "Отмена выпуска абстрактного отчета"
         )
   
+def get_abstract_pool_request(self, abstract_pool_id: str) -> HttpRequest[AbstractPoolModel]:
+    return (
+        self.request("GET", f"{self.path}/{abstract_pool_id}")
+        .set_summary("Открыть Абстрактный Пул")
+        .set_model_on_status(200, AbstractPoolModel)
+    )
+
+def update_abstract_pool_request(self, abstract_pool_id: str) -> HttpRequest:
+    return self.request("PUT", f"{self.path}/{abstract_pool_id}").set_summary("Отредактировать Абстрактный Пул")
+
+def remove_abstract_pool_request(self, abstract_pool_id: str) -> HttpRequest:
+    return self.request("DELETE", f"{self.path}/{abstract_pool_id}").set_summary("Удалить Абстрактный Пул")
+
+def test_abstract_server_pool_request(self, payload: AbstractTestModel) -> HttpRequest[AbstractTestResponseListModel]:
+    return (
+        self.request("POST", f"{self.path}/test")
+        .set_summary("Получить Таблицу Соединений С Абстрактным Пулом")
+        .set_body_as_model(payload)
+        .set_model_on_status(200, AbstractTestResponseListModel)
+    )
