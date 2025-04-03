@@ -1,6 +1,6 @@
 # адаптер для эндпоинта Get c query_params
 
-def get_data_request(
+def data_request(
     self,
     resource_id: str,
     block_id: int,
@@ -13,7 +13,7 @@ def get_data_request(
     offset: int = 0,
 ) -> HttpRequest[dict]:
     return (
-        self.request("GET", f"{self.path}/resources/{resource_id}/blocks/{block_id}/sections/{section}/data")
+        self.request("POST", f"{self.path}/resources/{resource_id}/blocks/{block_id}/sections/{section}/data")
         .set_summary("Получить данные для секции")
         .set_query_params(
             {
@@ -26,4 +26,16 @@ def get_data_request(
         )
         .set_model_on_status(200, dict)
     )
+
+    def get_abstract_report_issues_by_id_request(self, abstract_report_id: str, abstract_issue_id: str) -> HttpRequest[AbstractIssueInfoModel]:
+        return (
+            self.request("GET", f"{self.path}/abstract_reports/{abstract_report_id}/abstract_issues/{abstract_issue_id}")
+            .set_summary("Получить детальную информацию по выпуску абстрактного отчета")
+            .set_model_on_status(200, AbstractIssueInfoModel)
+        )
+
+    def abort_abstract_issue_request(self, abstract_report_id: str, abstract_issue_id: str) -> HttpRequest:
+        return self.request("GET", f"{self.path}/abstract_reports/{abstract_report_id}/abstract_issues/{abstract_issue_id}/abort").set_summary(
+            "Отмена выпуска абстрактного отчета"
+        )
   
