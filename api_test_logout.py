@@ -1,4 +1,4 @@
-# api_test c прелогином пользователя
+# api_test c прелогином пользователя и созданием дашборда
 
 import time
 import pytest
