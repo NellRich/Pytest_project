@@ -1,4 +1,19 @@
 # pydantic model + staticmethod
+from enum import Enum
+
+class IssueState(Enum):
+    CREATED = "created"
+    WORKING = "working"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    HALTED = "halted"
+    REMOVED = "removed"
+
+
+class IssueSource(Enum):
+    MANUAL = "manual"
+    SCHEDULE = "schedule"
+    
 
 class AbstractIntervalModel(CustomBaseModel):
     to: int
