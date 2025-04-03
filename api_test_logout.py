@@ -5,7 +5,7 @@ import pytest
 from assertpy import assert_that
 
 @pytest.mark.api
-@pytest.mark.platform
+@pytest.mark.product
 @pytest.mark.regress
 def test_update_dashboard_when_user_is_unblocked(
     api_client,
