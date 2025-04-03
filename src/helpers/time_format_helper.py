@@ -1,5 +1,7 @@
 # time format helper
 
+class TimeFormatHelper:
+
  @staticmethod
     def str_time_to_ms(value: str) -> int:
         """
